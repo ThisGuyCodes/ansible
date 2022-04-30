@@ -1,0 +1,12 @@
+- name: Install Default Package List
+  apt:
+    pkg: "{{ workstation_packages }}"
+    state: latest
+- name: Install Default Snap List
+  snap:
+    name: "{{ workstation_snaps }}"
+    state: present
+- name: Setup Git Configs
+  include_tasks: git_config.yml
+- name: Install Cloudflare Warp Client
+  include_tasks: cloudflare_warp.yml

@@ -1,0 +1,3 @@
+keyrings_folder: /usr/share/keyrings
+cloudflare_gpg_key_file_name: cloudflare-warp-archive-keyring.gpg
+cloudflare_target_distro: focal

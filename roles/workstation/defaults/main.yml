@@ -1,0 +1,13 @@
+workstation_packages:
+  - git
+  - neovim
+  - scdaemon
+  - curl
+  - tree
+  - htop
+workstation_snaps:
+  - bitwarden
+  - code
+  - bw
+  - firefox
+  - gotop

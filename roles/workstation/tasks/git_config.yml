@@ -1,0 +1,14 @@
+- name: Place Global Git Config
+  copy:
+    dest: /etc/gitconfig
+    src: etc_gitconfig
+    owner: root
+    group: root
+    mode: 0644
+- name: Place My Git Config
+  copy:
+    dest: /home/thisguy/.gitconfig
+    src: my_gitconfig
+    owner: thisguy
+    group: thisguy
+    mode: 0644

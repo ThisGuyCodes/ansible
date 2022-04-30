@@ -1,0 +1,5 @@
+- name: set up this machine for work
+  hosts: localhost
+  connection: local
+  roles:
+    - workstation

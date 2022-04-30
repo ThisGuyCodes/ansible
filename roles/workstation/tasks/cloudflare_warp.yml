@@ -1,0 +1,28 @@
+- name: Get Cloudflare GPG Key
+  uri:
+    url: https://pkg.cloudflareclient.com/pubkey.gpg
+    return_content: true
+  register: cloudflare_gpg
+- name: Save Cloudflare GPG Key
+  shell: |
+    cat << EOF
+    {{ cloudflare_gpg.content }}
+    EOF | gpg --yes --dearmor --output {{ keyrings_folder }}/{{cloudflare_gpg_key_file_name}}
+    creates: "{{ keyrings_folder }}/{{cloudflare_gpg_key_file_name}}"
+  when: cloudflare_gpg.changed
+- name: Install Cloudflare Source List
+  template:
+    src: cloudflare-client.list.j2
+    dest: /etc/apt/sources.list.d/cloudflare-client.list
+    owner: root
+    group: root
+    mode: u=r,g=r,o=r
+  register: cloudflare_source_list
+- name: Update Apt Cache
+  when: cloudflare_source_list.changed or cloudflare_gpg.changed
+  apt:
+    update_cache: true
+- name: Install Warp Client
+  apt:
+    name: cloudflare-warp
+    state: latest
