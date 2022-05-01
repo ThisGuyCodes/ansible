@@ -5,6 +5,8 @@ workstation_packages:
   - curl
   - tree
   - htop
+  - command-not-found
+  - xsel
 workstation_snaps:
   - bitwarden
   - code
