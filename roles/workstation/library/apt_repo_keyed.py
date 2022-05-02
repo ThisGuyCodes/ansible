@@ -38,16 +38,16 @@ def run_module():
         module.fail_json('Error retrieving gpg key from provided URL')
 
     gpg_raw = gpg_response.read().decode('utf8')
-    rc, gpg_converted, _ = module.run_command('gpg --yes --dearmor', data=gpg_raw)
+    rc, gpg_converted, _ = module.run_command('gpg --yes --dearmor', data=gpg_raw, encoding=None)
     if rc != 0:
         module.fail_json(**result)
     
-    gpg_converted = gpg_converted.encode('utf-8')
+    gpg_converted = gpg_converted
     
-    gpg_sha_expected = sha256(gpg_converted)
+    gpg_sha_expected = sha256(gpg_converted).hexdigest()
     gpg_sha_actual = module.sha256(gpg_key_location)
 
-    if gpg_sha_expected.hexdigest() != gpg_sha_actual:
+    if gpg_sha_expected != gpg_sha_actual:
         result['changed'] = True
         if not module.check_mode:
             with open(gpg_key_location, 'wb') as gpg_key_file:
@@ -59,21 +59,15 @@ def run_module():
         distro=module.params['distro'],
         name=module.params['repo_name'],
     ).encode('utf8')
-    apt_sha_expected = sha256(apt_line)
+    apt_sha_expected = sha256(apt_line).hexdigest()
     apt_sha_actual = module.sha256(apt_list_location)
-    if apt_sha_expected.hexdigest() != apt_sha_actual:
+    if apt_sha_expected != apt_sha_actual:
         result['changed'] = True
         if not module.check_mode:
             with open(apt_list_location, 'wb') as apt_list_file:
                 apt_list_file.write(apt_line)
     
     module.exit_json(**result)
-
-
-
-
-
-
 
 def main():
     run_module()
