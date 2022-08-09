@@ -1,0 +1,8 @@
+- name: Check if Homebrew is already installed
+  stat:
+    path: /usr/local/bin/brew
+  register: homebrew_installed
+
+- name: Install Homebrew
+  script: "install-homebrew_macos.sh"
+  when: not homebrew_installed.stat.exists

@@ -1,0 +1,26 @@
+- homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+    upgrade_options: ignore-pinned
+- homebrew:
+    name:
+      - neovim
+      - git
+      - tree
+      - kubectl
+      - helm
+      - terraform
+      - golang
+      - ruby
+- homebrew_cask:
+    upgrade_all: true
+- homebrew_cask:
+    name: visual-studio-code
+- homebrew_cask:
+    name: iterm2
+- homebrew_cask:
+    name: warp
+- homebrew_cask:
+    name: rectangle
+- homebrew_cask:
+    name: podman-desktop
