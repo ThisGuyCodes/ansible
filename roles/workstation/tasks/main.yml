@@ -12,6 +12,8 @@
       - terraform
       - golang
       - ruby
+      - httpie
+      - jq
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
