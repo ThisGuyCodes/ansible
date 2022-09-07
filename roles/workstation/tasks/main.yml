@@ -14,6 +14,7 @@
       - ruby
       - httpie
       - jq
+      - vault
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
