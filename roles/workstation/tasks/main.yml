@@ -4,6 +4,7 @@
     upgrade_options: ignore-pinned
 - homebrew:
     name:
+      - ansible
       - neovim
       - git
       - tree
@@ -18,12 +19,10 @@
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
-    name: visual-studio-code
-- homebrew_cask:
-    name: iterm2
-- homebrew_cask:
-    name: warp
-- homebrew_cask:
-    name: rectangle
-- homebrew_cask:
-    name: podman-desktop
+    name:
+      - visual-studio-code
+      - keybase
+      - iterm2
+      - warp
+      - rectangle
+      - podman-desktop
