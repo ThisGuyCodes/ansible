@@ -16,7 +16,7 @@
       - httpie
       - jq
       - vault
-      - fluxctl
+      - fluxcd/tap/flux
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
