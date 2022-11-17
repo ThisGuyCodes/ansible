@@ -17,6 +17,7 @@
       - jq
       - vault
       - fluxcd/tap/flux
+      - thefuck
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
