@@ -1,3 +1,7 @@
+- name: Enable Rosetta
+  shell:
+    cmd: softwareupdate --install-rosetta --agree-to-license
+    creates: /usr/libexec/rosetta/oahd
 - homebrew:
     update_homebrew: yes
     upgrade_all: yes
