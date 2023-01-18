@@ -22,6 +22,7 @@
       - vault
       - fluxcd/tap/flux
       - thefuck
+      - pnpm
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
