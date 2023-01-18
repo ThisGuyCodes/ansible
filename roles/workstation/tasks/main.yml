@@ -8,6 +8,7 @@
     upgrade_options: ignore-pinned
 - homebrew:
     name:
+      - defaultbrowser
       - ansible
       - neovim
       - git
@@ -34,3 +35,10 @@
       - warp
       - rectangle
       - podman-desktop
+- name: Copy ChromeDefault script
+  copy:
+    src: ChromeDefault.scpt
+    dest: /tmp/ChromeDefault.scpt
+- name: Set Chrome as the default browser
+  shell:
+    cmd: osascript /tmp/ChromeDefault.scpt
