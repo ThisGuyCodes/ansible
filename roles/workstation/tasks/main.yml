@@ -28,6 +28,7 @@
 - homebrew_cask:
     name:
       - visual-studio-code
+      - google-chrome
       - keybase
       - iterm2
       - warp
