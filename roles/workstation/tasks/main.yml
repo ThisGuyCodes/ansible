@@ -1,4 +1,4 @@
-- name: Enable Rosetta
+- name: Enable Rosetta2
   shell:
     cmd: softwareupdate --install-rosetta --agree-to-license
     creates: /usr/libexec/rosetta/oahd
