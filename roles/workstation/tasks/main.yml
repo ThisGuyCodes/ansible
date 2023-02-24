@@ -51,7 +51,7 @@
 - name: Download dockutil
   when: dockutil_stat.stat.checksum != "39dbca05314c27f9be56b3dcf8aa6f10e54e445d2c1b67af0d01d1ee999a7d62"
   get_url:
-    checksum: sha356:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
+    checksum: sha256:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
     dest: /tmp/dockutil.pkg
     url: https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
 - name: Install dockutil
