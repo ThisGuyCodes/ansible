@@ -38,6 +38,7 @@
       - rectangle
       - podman-desktop
       - flameshot
+      - signal
 - name: Set Chrome as the default browser
   script: "{{ role_path }}/files/ChromeDefault.scpt"
   args:
