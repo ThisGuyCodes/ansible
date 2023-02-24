@@ -8,6 +8,9 @@
     upgrade_options: ignore-pinned
 - homebrew:
     name:
+      - terraform-docs
+      - ripgrep
+      - awscli
       - defaultbrowser
       - ansible
       - neovim
