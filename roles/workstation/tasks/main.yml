@@ -60,7 +60,7 @@
       command:
         cmd: installer -pkg /tmp/dockutil.pkg -target CurrentUserHomeDirectory
         creates: ~/usr/local/bin/dockutil
-    - name: Delete dockutil pkg
-      file:
-        path: /tmp/dockutil.pkg
-        state: absent
+- name: Delete dockutil pkg
+  file:
+    path: /tmp/dockutil.pkg
+    state: absent
