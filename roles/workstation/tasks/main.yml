@@ -48,14 +48,19 @@
     path: ~/usr/local/bin/dockutil
     checksum_algorithm: sha256
   register: dockutil_stat
-- name: Download dockutil
-  when: dockutil_stat.stat.checksum != "39dbca05314c27f9be56b3dcf8aa6f10e54e445d2c1b67af0d01d1ee999a7d62"
-  get_url:
-    checksum: sha256:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
-    dest: /tmp/dockutil.pkg
-    url: https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
-- name: Install dockutil
-  when: dockutil_stat.stat.checksum != "39dbca05314c27f9be56b3dcf8aa6f10e54e445d2c1b67af0d01d1ee999a7d62"
-  command:
-    cmd: installer -pkg /tmp/dockutil.pkg -target CurrentUserHomeDirectory
-    creates: ~/usr/local/bin/dockutil
+- name: Install / update dockutil
+  when: not dockutil_stat.stat.exists or dockutil_stat.stat.checksum != "39dbca05314c27f9be56b3dcf8aa6f10e54e445d2c1b67af0d01d1ee999a7d62"
+  block:
+    - name: Download dockutil
+      get_url:
+        checksum: sha256:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
+        dest: /tmp/dockutil.pkg
+        url: https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
+    - name: Install dockutil
+      command:
+        cmd: installer -pkg /tmp/dockutil.pkg -target CurrentUserHomeDirectory
+        creates: ~/usr/local/bin/dockutil
+    - name: Delete dockutil pkg
+      file:
+        path: /tmp/dockutil.pkg
+        state: absent
