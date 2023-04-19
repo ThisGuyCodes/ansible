@@ -28,6 +28,7 @@
       - fluxcd/tap/flux
       - thefuck
       - pnpm
+      - pipenv
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
