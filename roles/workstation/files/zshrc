@@ -14,3 +14,5 @@ battail() {
     tail -f "$@" | batlog
 }
 alias cat=bat
+
+alias graph="dot -Tpng -Kcirco | imgcat"
