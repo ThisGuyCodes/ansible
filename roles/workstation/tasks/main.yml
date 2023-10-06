@@ -8,6 +8,7 @@
     upgrade_options: ignore-pinned
 - homebrew:
     name:
+      - zsh
       - gh
       - terraform-docs
       - ripgrep
