@@ -20,28 +20,57 @@
       - kubectl
       - helm
       - tfenv
+      - warrensbox/tap/tgswitch
       - golang
       - ruby
-      - httpie
       - jq
       - vault
-      - fluxcd/tap/flux
       - thefuck
-      - pnpm
-      - pipenv
+      - mas
+      - tmux
+      - ruby-build
+      - rbenv
+      - bat
+      - fd
+      - git-delta
+      - fzf
+      - aws-vault
 - homebrew_cask:
     upgrade_all: true
 - homebrew_cask:
     accept_external_apps: true
     name:
       - visual-studio-code
-      - keybase
+      - github
       - iterm2
-      - warp
       - rectangle
       - podman-desktop
-      - flameshot
       - signal
+      - figma
+      - notion
+      - basecamp
+      - loom
+- name: Install AppStore Apps
+  mas:
+    state: latest
+    id:
+      - 585829637 # Todoist
+- name: Top level .gitconfig
+  copy:
+    src: "{{ role_path }}/files/gitconfig_top"
+    dest: ~/.gitconfig
+- name: zenv
+  copy:
+    src: "{{role_path}}/files/zenv"
+    dest: ~/.zenv
+- name: zprofile
+  copy:
+    src: "{{role_path}}/files/zprofile"
+    dest: ~/.zprofile
+- name: zshrc
+  copy:
+    src: "{{role_path}}/files/zshrc"
+    dest: ~/.zshrc
 - name: Set Chrome as the default browser
   script: "{{ role_path }}/files/ChromeDefault.scpt"
   args:
