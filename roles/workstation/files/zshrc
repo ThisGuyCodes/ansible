@@ -1,5 +1,5 @@
-eval $(rbenv init - zsh)
-eval $(thefuck --alias)
+eval "$(rbenv init - zsh)"
+eval "$(thefuck --alias)"
 
 export BAT_THEME="Visual Studio Dark+"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
