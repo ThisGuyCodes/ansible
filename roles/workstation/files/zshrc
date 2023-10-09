@@ -16,3 +16,27 @@ battail() {
 alias cat=bat
 
 alias graph="dot -Tpng -Kcirco | imgcat"
+
+# include timestamp and elapsed time
+setopt EXTENDED_HISTORY
+# don't record a duplicate event
+setopt HIST_IGNORE_DUPS
+# same but for the history file
+setopt HIST_SAVE_NO_DUPS
+# don't display duplicate events (e.g. when searching)
+setopt HIST_FIND_NO_DUPS
+# don't record events starting with a space
+setopt HIST_IGNORE_SPACE
+# does not execute immediately upon history expansion
+setopt HIST_VERIFY
+# split words correctly, not just naively by whitespace
+setopt HIST_LEX_WORDS
+# append events right after they run, also import events constantly
+setopt SHARE_HISTORY
+
+# keep cd history automatically
+setopt AUTO_PUSHD
+# don't push duplicates
+setopt PUSHD_IGNORE_DUPS
+# don't print the stack each time
+setopt PUSHD_SILENT
