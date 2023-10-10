@@ -1,0 +1,16 @@
+- git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: ~/.zprezto
+    recursive: true
+- find:
+    paths:
+      - ~/.zprezto/runcoms
+    patterns: '^(?!.*[.]md$).*$'
+    use_regex: true
+  register: prezto_runcoms
+- file:
+    state: link
+    path: "~/.{{ item['path'].split('/')[-1] }}"
+    src: "{{ item['path'] }}"
+    force: true
+  loop: "{{ prezto_runcoms['files'] }}"

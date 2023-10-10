@@ -6,10 +6,7 @@
 - include_tasks: dotfiles.yml
 - include_tasks: dockutil.yml
 - include_tasks: github_known_hosts.yml
-- git:
-    repo: git@github.com:sorin-ionescu/prezto.git
-    dest: ~/.zprezto
-    recursive: true
+- include_tasks: prezto.yml
 - name: Set Chrome as the default browser
   script: "{{ role_path }}/files/ChromeDefault.scpt"
   args:
