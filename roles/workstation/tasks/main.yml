@@ -2,98 +2,11 @@
   shell:
     cmd: softwareupdate --install-rosetta --agree-to-license
     creates: /usr/libexec/rosetta/oahd
-- homebrew:
-    update_homebrew: yes
-    upgrade_all: yes
-    upgrade_options: ignore-pinned
-- homebrew:
-    name:
-      - zsh
-      - gh
-      - terraform-docs
-      - ripgrep
-      - awscli
-      - defaultbrowser
-      - ansible
-      - neovim
-      - git
-      - tree
-      - kubectl
-      - helm
-      - tfenv
-      - warrensbox/tap/tgswitch
-      - golang
-      - ruby
-      - jq
-      - vault
-      - thefuck
-      - mas
-      - tmux
-      - ruby-build
-      - rbenv
-      - bat
-      - fd
-      - git-delta
-      - fzf
-      - aws-vault
-- homebrew_cask:
-    upgrade_all: true
-- homebrew_cask:
-    accept_external_apps: true
-    name:
-      - visual-studio-code
-      - github
-      - iterm2
-      - rectangle
-      - podman-desktop
-      - signal
-      - figma
-      - notion
-      - basecamp
-      - loom
-- name: Install AppStore Apps
-  mas:
-    state: latest
-    id:
-      - 585829637 # Todoist
-- name: Top level .gitconfig
-  copy:
-    src: "{{ role_path }}/files/gitconfig_top"
-    dest: ~/.gitconfig
-- name: zenv
-  copy:
-    src: "{{role_path}}/files/zenv"
-    dest: ~/.zenv
-- name: zprofile
-  copy:
-    src: "{{role_path}}/files/zprofile"
-    dest: ~/.zprofile
-- name: zshrc
-  copy:
-    src: "{{role_path}}/files/zshrc"
-    dest: ~/.zshrc
+- include_tasks: packages.yml
+- include_tasks: dotfiles.yml
+- include_tasks: dockutil.yml
+- include_tasks: github_known_hosts.yml
 - name: Set Chrome as the default browser
   script: "{{ role_path }}/files/ChromeDefault.scpt"
   args:
     executable: osascript
-- name: Check version of dockutil
-  stat:
-    path: ~/usr/local/bin/dockutil
-    checksum_algorithm: sha256
-  register: dockutil_stat
-- name: Install / update dockutil
-  when: not dockutil_stat.stat.exists or dockutil_stat.stat.checksum != "39dbca05314c27f9be56b3dcf8aa6f10e54e445d2c1b67af0d01d1ee999a7d62"
-  block:
-    - name: Download dockutil
-      get_url:
-        checksum: sha256:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
-        dest: /tmp/dockutil.pkg
-        url: https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
-    - name: Install dockutil
-      command:
-        cmd: installer -pkg /tmp/dockutil.pkg -target CurrentUserHomeDirectory
-        creates: ~/usr/local/bin/dockutil
-- name: Delete dockutil pkg
-  file:
-    path: /tmp/dockutil.pkg
-    state: absent

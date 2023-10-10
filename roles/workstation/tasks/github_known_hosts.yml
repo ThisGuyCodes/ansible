@@ -1,0 +1,20 @@
+- name: get github meta
+  uri:
+    url: https://api.github.com/meta
+  register: githubmeta
+- debug:
+    var: githubmeta['json']['ssh_keys']
+    verbosity: 1
+- file:
+    path: ~/.ssh
+    state: directory
+    mode: 0755
+- file:
+    path: ~/.ssh/known_hosts
+    state: file
+    mode: 0600
+- lineinfile:
+    path: ~/.ssh/known_hosts
+    regexp: '^github.com\s+{{ item.split(" ")[0] | regex_escape() }}\s+.*$'
+    line: "github.com {{item}}"
+  loop: "{{ githubmeta['json']['ssh_keys'] }}"

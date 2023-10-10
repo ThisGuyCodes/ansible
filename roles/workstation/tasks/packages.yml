@@ -1,0 +1,54 @@
+- homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+    upgrade_options: ignore-pinned
+- homebrew:
+    name:
+      - zsh
+      - gh
+      - terraform-docs
+      - ripgrep
+      - awscli
+      - defaultbrowser
+      - ansible
+      - neovim
+      - git
+      - tree
+      - kubectl
+      - helm
+      - tfenv
+      - warrensbox/tap/tgswitch
+      - golang
+      - ruby
+      - jq
+      - vault
+      - thefuck
+      - mas
+      - tmux
+      - ruby-build
+      - rbenv
+      - bat
+      - fd
+      - git-delta
+      - fzf
+      - aws-vault
+- homebrew_cask:
+    upgrade_all: true
+- homebrew_cask:
+    accept_external_apps: true
+    name:
+      - visual-studio-code
+      - github
+      - iterm2
+      - rectangle
+      - podman-desktop
+      - signal
+      - figma
+      - notion
+      - basecamp
+      - loom
+- name: Install AppStore Apps
+  mas:
+    state: latest
+    id:
+      - 585829637 # Todoist
