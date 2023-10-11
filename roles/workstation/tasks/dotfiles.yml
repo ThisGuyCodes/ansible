@@ -2,15 +2,3 @@
   copy:
     src: "{{ role_path }}/files/gitconfig_top"
     dest: ~/.gitconfig
-# - name: zenv
-#   copy:
-#     src: "{{role_path}}/files/zenv"
-#     dest: ~/.zenv
-# - name: zprofile
-#   copy:
-#     src: "{{role_path}}/files/zprofile"
-#     dest: ~/.zprofile
-# - name: zshrc
-#   copy:
-#     src: "{{role_path}}/files/zshrc"
-#     dest: ~/.zshrc
