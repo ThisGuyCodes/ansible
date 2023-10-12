@@ -1,20 +1,22 @@
-- name: get github meta
+- name: Get github metadata
   uri:
     url: https://api.github.com/meta
   register: githubmeta
-- debug:
-    var: githubmeta['json']['ssh_keys']
-    verbosity: 1
-- file:
+- name: Ensure .ssh exists
+  file:
     path: ~/.ssh
     state: directory
     mode: 0755
-- file:
+- name: Ensure known_hosts exists
+  file:
     path: ~/.ssh/known_hosts
     state: file
     mode: 0600
-- lineinfile:
+- name: Ensure github.com known_host entries are correct
+  lineinfile:
     path: ~/.ssh/known_hosts
     regexp: '^github.com\s+{{ item.split(" ")[0] | regex_escape() }}\s+.*$'
     line: "github.com {{item}}"
   loop: "{{ githubmeta['json']['ssh_keys'] }}"
+  loop_control:
+    label: "{{ item.split(' ')[0] }}"
