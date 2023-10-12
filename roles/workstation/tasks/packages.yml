@@ -28,6 +28,7 @@
       - git-delta
       - fzf
       - aws-vault
+      - curl
 - homebrew_cask:
     accept_external_apps: true
     name:
