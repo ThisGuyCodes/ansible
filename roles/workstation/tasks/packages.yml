@@ -1,71 +1,67 @@
-- homebrew:
-    name:
-      - zsh
-      - gh
-      - terraform-docs
-      - ripgrep
-      - awscli
-      - defaultbrowser
-      - ansible
-      - neovim
-      - git
-      - tree
-      - kubectl
-      - helm
-      - tfenv
-      - warrensbox/tap/tgswitch
-      - golang
-      - ruby
-      - jq
-      - vault
-      - thefuck
-      - mas
-      - tmux
-      - ruby-build
-      - rbenv
-      - bat
-      - fd
-      - git-delta
-      - fzf
-      - aws-vault
-      - curl
-- homebrew_cask:
+- name: Ensure homebrew package hash file exists
+  copy:
+    content: ""
+    dest: /tmp/homebrew_package_hash
+    force: false
+- name: Get hash of last homebrew package install list
+  slurp:
+    src: /tmp/homebrew_package_hash
+  register: homebrew_package_hash
+- name: Install Homebrew packages
+  homebrew:
+    name: "{{ homebrew_packages }}"
+  when: homebrew_package_hash['content'] != ( ','.join(homebrew_packages) | hash('sha256') | b64encode )
+- name: Save hash of homebrew package install list
+  copy:
+    content: "{{ ','.join(homebrew_packages) | hash('sha256') }}"
+    dest: /tmp/homebrew_package_hash
+- name: Ensure homebrew cask hash file exists
+  copy:
+    content: ""
+    dest: /tmp/homebrew_cask_hash
+    force: false
+- name: Get hash of last homebrew cask install list
+  slurp:
+    src: /tmp/homebrew_cask_hash
+  register: homebrew_cask_hash
+- name: Install Homebrew casks
+  homebrew_cask:
     accept_external_apps: true
-    name:
-      - visual-studio-code
-      - github
-      - iterm2
-      - rectangle
-      - podman-desktop
-      - signal
-      - figma
-      - notion
-      - basecamp
-      - loom
-- name: Install AppStore Apps
-  mas:
-    state: present
-    id:
-      - 585829637 # Todoist
+    name: "{{ homebrew_casks }}"
+  when: homebrew_cask_hash['content'] != ( ','.join(homebrew_casks) | hash('sha256') | b64encode )
+- name: Save hash of homebrew cask install list
+  copy:
+    content: "{{ ','.join(homebrew_casks) | hash('sha256') }}"
+    dest: /tmp/homebrew_cask_hash
+# - name: Install AppStore Apps
+#   mas:
+#     state: present
+#     id:
+#       - 585829637 # Todoist
 
 # Potentially super slow stuff
-- find:
+- name: Check for last run of slow stuff
+  find:
     paths: /tmp
     pattern: slow_ansible_items_run
     age: -1h
   register: when_last_run
-- homebrew:
+- name: Update everything Homebrew
+  homebrew:
     update_homebrew: yes
     upgrade_all: yes
     upgrade_options: ignore-pinned
   when: when_last_run.files | length == 0
-- homebrew_cask:
+- name: Update Homewbrew casks
+  homebrew_cask:
     upgrade_all: true
   when: when_last_run.files | length == 0
-- mas:
+- name: Update AppStore apps
+  mas:
     upgrade_all: true
   when: when_last_run.files | length == 0
-- file:
+- name: Log run of slow stuff
+  file:
     state: touch
     path: /tmp/slow_ansible_items_run
   when: when_last_run.files | length == 0
