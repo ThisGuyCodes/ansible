@@ -1,0 +1,6 @@
+---
+- name: "Workstation"
+  hosts: localhost
+  connection: local
+  roles:
+    - workstation
