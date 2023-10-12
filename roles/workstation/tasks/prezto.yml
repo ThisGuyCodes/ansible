@@ -1,16 +1,39 @@
-- git:
+- name: Enumerate prezto patches
+  find:
+    paths:
+      - "{{ role_path }}/files/prezto_patches"
+    patterns: "*.patch"
+  register: prezto_patches
+- name: Set up Prezto git repo
+  git:
     repo: https://github.com/sorin-ionescu/prezto.git
     dest: ~/.zprezto
     recursive: true
-- find:
+  environment:
+    GIT_TERMINAL_PROMPT: "0"
+- name: Apply prezto patches
+  shell:
+    chdir: ~/.zprezto
+    cmd: |
+      git apply --index {{ item['path'] | quote }}
+      git commit --message {{ ("patch: " + item['path'].removesuffix('.patch').split('/')[-1]) | quote }}
+    creates: "~/.zprezto/patches/{{ item['path'].removesuffix('.patch').split('/')[-1] }}"
+  loop: "{{ prezto_patches['files'] }}"
+  loop_control:
+    label: "{{ item['path'].removesuffix('.patch').split('/')[-1] }}"
+- name: Enumerate prezto runcoms
+  find:
     paths:
       - ~/.zprezto/runcoms
     patterns: '^(?!.*[.]md$).*$'
     use_regex: true
   register: prezto_runcoms
-- file:
+- name: Link prezto runcoms 
+  file:
     state: link
     path: "~/.{{ item['path'].split('/')[-1] }}"
     src: "{{ item['path'] }}"
     force: true
   loop: "{{ prezto_runcoms['files'] }}"
+  loop_control:
+    label: "{{ item['path'].split('/')[-1] }}"
