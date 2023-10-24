@@ -2,3 +2,4 @@
   copy:
     src: "{{ role_path }}/files/gitconfig_top"
     dest: ~/.gitconfig
+    mode: "u=rw,g=r,o=r"

@@ -6,6 +6,7 @@
     content: ""
     dest: /tmp/homebrew_package_hash
     force: false
+    mode: "u=rw,g=,o="
 - name: Get hash of last homebrew package install list
   slurp:
     src: /tmp/homebrew_package_hash
@@ -18,11 +19,13 @@
   copy:
     content: "{{ ','.join(homebrew_packages) | hash('sha256') }}"
     dest: /tmp/homebrew_package_hash
+    mode: "u=rw,g=,o="
 - name: Ensure homebrew cask hash file exists
   copy:
     content: ""
     dest: /tmp/homebrew_cask_hash
     force: false
+    mode: "u=rw,g=,o="
 - name: Get hash of last homebrew cask install list
   slurp:
     src: /tmp/homebrew_cask_hash
@@ -36,6 +39,7 @@
   copy:
     content: "{{ ','.join(homebrew_casks) | hash('sha256') }}"
     dest: /tmp/homebrew_cask_hash
+    mode: "u=rw,g=,o="
 # - name: Install AppStore Apps
 #   mas:
 #     state: present
@@ -51,8 +55,8 @@
   register: when_last_run
 - name: Update everything Homebrew
   homebrew:
-    update_homebrew: yes
-    upgrade_all: yes
+    update_homebrew: true
+    upgrade_all: true
     upgrade_options: ignore-pinned
   when: when_last_run.files | length == 0
 - name: Update Homewbrew casks
@@ -67,4 +71,5 @@
   file:
     state: touch
     path: /tmp/slow_ansible_items_run
+    mode: "u=rw,g=,o="
   when: when_last_run.files | length == 0

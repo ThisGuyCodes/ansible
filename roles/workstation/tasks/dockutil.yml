@@ -11,6 +11,7 @@
         checksum: sha256:175137ea747e83ed221d60b18b712b256ed31531534cde84f679487d337668fd
         dest: /tmp/dockutil.pkg
         url: https://github.com/kcrawford/dockutil/releases/download/3.0.2/dockutil-3.0.2.pkg
+        mode: u=rw,g=,o=
     - name: Install dockutil
       command:
         cmd: installer -pkg /tmp/dockutil.pkg -target CurrentUserHomeDirectory

@@ -1,12 +1,17 @@
 - name: Enable Rosetta2
-  shell:
+  command:
     cmd: softwareupdate --install-rosetta --agree-to-license
     creates: /usr/libexec/rosetta/oahd
-- include_tasks: packages.yml
-- include_tasks: dotfiles.yml
-- include_tasks: dockutil.yml
-- include_tasks: github_known_hosts.yml
-- include_tasks: prezto.yml
+- name: Install Packages
+  include_tasks: packages.yml
+- name: Copy Dotfiles
+  include_tasks: dotfiles.yml
+- name: Setup Dockutil
+  include_tasks: dockutil.yml
+- name: Configure Github known_hosts
+  include_tasks: github_known_hosts.yml
+- name: Setup Shell
+  include_tasks: prezto.yml
 - name: Set Chrome as the default browser
   script: "{{ role_path }}/files/ChromeDefault.scpt"
   args:

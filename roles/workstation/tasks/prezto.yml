@@ -1,4 +1,4 @@
-- name: Set up Prezto git repo
+- name: Set up Prezto git repo # noqa latest[git]
   git:
     repo: git@github.com:ThisGuyCodes/prezto.git
     dest: ~/.zprezto
@@ -12,7 +12,7 @@
     patterns: '^(?!.*[.]md$).*$'
     use_regex: true
   register: prezto_runcoms
-- name: Link prezto runcoms 
+- name: Link prezto runcoms
   file:
     state: link
     path: "~/.{{ item['path'].split('/')[-1] }}"
