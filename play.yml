@@ -5,6 +5,10 @@
   roles:
     - workstation
   vars:
+    homebrew_taps:
+      - warrensbox/tap
+      - homebrew/cask-fonts
+      - oven-sh/bun
     homebrew_packages:
       - zsh
       - gh
@@ -35,7 +39,16 @@
       - fzf
       - aws-vault
       - curl
+      - semgrep
+      - graphviz
+      - tgswitch
+      - bat-extras
+      - pre-commit
+      - bun
+      - python@3.12
+      - pipenv
     homebrew_casks:
+      - font-hack-nerd-font
       - visual-studio-code
       - github
       - iterm2

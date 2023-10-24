@@ -1,3 +1,6 @@
+- name: Homewbrew Taps
+  homebrew_tap:
+    name: "{{ homebrew_taps }}"
 - name: Ensure homebrew package hash file exists
   copy:
     content: ""
