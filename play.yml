@@ -47,6 +47,13 @@
       - bun
       - python@3.12
       - pipenv
+      - sops
+      - kubergrunt
+      - flyctl
+      - 1password-cli
+      - k9s
+      - docker
+      - gum
     homebrew_casks:
       - font-hack-nerd-font
       - visual-studio-code
