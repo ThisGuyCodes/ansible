@@ -54,6 +54,7 @@
       - k9s
       - docker
       - gum
+      - mosh
     homebrew_casks:
       - font-hack-nerd-font
       - visual-studio-code
