@@ -58,6 +58,7 @@ workstation_homebrew_casks_macos:
   - iterm2
   - rectangle
   - dash
+  - secretive
 workstation_hombrew_packages_linux: []
 workstation_app_store_apps:
   - 585829637 # Todoist
