@@ -1,7 +1,9 @@
 ---
-- name: Freeform
-  shell: '$HOME/usr/local/bin/dockutil $HOME/Library/Preferences/com.apple.dock.plist --remove {{ item }}'
+- name: Remove Unwanted Dock Items
+  shell: '$HOME/usr/local/bin/dockutil --remove {{ item }} --no-restart'
   loop: '{{ workstation_dockutil_removes }}'
   register: dockutil_output
   changed_when: dockutil_output.rc == 0
   ignore_errors: true
+- name: Restart the Dock
+  shell: '/usr/bin/killall Dock'
