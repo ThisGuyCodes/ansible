@@ -1,0 +1,10 @@
+- name: Construct MacOS variables
+  set_fact:
+    homebrew_packages: '{{ homebrew_packages_all | union(homebrew_packages_macos) | sort }}'
+    homebrew_casks: '{{ homebrew_casks_all | union(homebrew_casks_macos) | sort }}'
+  when: ansible_facts.system == "Darwin"
+- name: Construct Linux variables
+  set_fact:
+    homebrew_packages: '{{ homebrew_packages_all | union(homebrew_packages_linux) | sort }}'
+    homebrew_casks: '{{ homebrew_casks_all | union(homebrew_casks_linux) | sort }}'
+  when: ansible_facts.system == "Linux"

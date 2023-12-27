@@ -1,0 +1,83 @@
+---
+homebrew_taps:
+  - warrensbox/tap
+  - homebrew/cask-fonts
+  - oven-sh/bun
+homebrew_packages_all:
+  - zsh
+  - gh
+  - terraform-docs
+  - ripgrep
+  - awscli
+  - ansible
+  - neovim
+  - git
+  - tree
+  - kubectl
+  - helm
+  - tfenv
+  - golang
+  - ruby
+  - jq
+  - vault
+  - thefuck
+  - tmux
+  - ruby-build
+  - rbenv
+  - bat
+  - fd
+  - git-delta
+  - fzf
+  - aws-vault
+  - curl
+  - semgrep
+  - graphviz
+  - tgswitch
+  - bat-extras
+  - pre-commit
+  - python
+  - pipenv
+  - sops
+  - kubergrunt
+  - flyctl
+  - k9s
+  - docker
+  - gum
+  - mosh
+homebrew_packages_macos:
+  - defaultbrowser
+  - mas
+homebrew_packages_linux: []
+homebrew_casks_all:
+  - font-hack-nerd-font
+  - visual-studio-code
+  - github
+  - podman-desktop
+  - signal
+  - figma
+  - notion
+  - basecamp
+  - loom
+homebrew_casks_macos:
+  - iterm2
+  - rectangle
+  - dash
+hombrew_packages_linux: []
+app_store_apps:
+  - 585829637 # Todoist
+dockutil_removes:
+  - com.apple.Terminal
+  - com.apple.systempreferences
+  - com.apple.AppStore
+  - com.apple.TV
+  - com.apple.reminders
+  - com.apple.AddressBook
+  - com.apple.iCal
+  - com.apple.FaceTime
+  - com.apple.Photos
+  - com.apple.Maps
+  - com.apple.mail
+  - com.apple.MobileSMS
+  - com.apple.Safari
+  - com.apple.launchpad.launcher
+  - com.apple.news

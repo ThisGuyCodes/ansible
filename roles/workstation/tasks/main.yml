@@ -2,6 +2,8 @@
   command:
     cmd: softwareupdate --install-rosetta --agree-to-license
     creates: /usr/libexec/rosetta/oahd
+- name: Construct Variables
+  include_tasks: construct_vars.yml
 - name: Install Packages
   include_tasks: packages.yml
 - name: Copy Dotfiles
@@ -12,7 +14,7 @@
   include_tasks: github_known_hosts.yml
 - name: Setup Shell
   include_tasks: prezto.yml
-- name: Set Chrome as the default browser
-  script: "{{ role_path }}/files/ChromeDefault.scpt"
-  args:
-    executable: osascript
+# - name: Set Chrome as the default browser
+#   script: '{{ role_path }}/files/ChromeDefault.scpt'
+#   args:
+#     executable: osascript

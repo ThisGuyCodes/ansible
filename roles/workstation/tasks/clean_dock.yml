@@ -1,0 +1,4 @@
+---
+- name: Freeform
+  shell: '$HOME/usr/local/bin/dockutil --remove {{ bundle }} || true'
+  loop: '{{ dockutil_removes }}'

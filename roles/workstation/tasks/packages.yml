@@ -1,12 +1,12 @@
 - name: Homewbrew Taps
   homebrew_tap:
-    name: "{{ homebrew_taps }}"
+    name: '{{ homebrew_taps }}'
 - name: Ensure homebrew package hash file exists
   copy:
-    content: ""
+    content: ''
     dest: /tmp/homebrew_package_hash
     force: false
-    mode: "u=rw,g=,o="
+    mode: 'u=rw,g=,o='
 - name: Get hash of last homebrew package install list
   slurp:
     src: /tmp/homebrew_package_hash
@@ -16,18 +16,18 @@
   block:
     - name: Install Homebrew packages
       homebrew:
-        name: "{{ homebrew_packages }}"
+        name: '{{ homebrew_packages }}'
     - name: Save hash of homebrew package install list
       copy:
         content: "{{ ','.join(homebrew_packages) | hash('sha256') }}"
         dest: /tmp/homebrew_package_hash
-        mode: "u=rw,g=,o="
+        mode: 'u=rw,g=,o='
 - name: Ensure Homebrew Cask hash file exists
   copy:
-    content: ""
+    content: ''
     dest: /tmp/homebrew_cask_hash
     force: false
-    mode: "u=rw,g=,o="
+    mode: 'u=rw,g=,o='
 - name: Get hash of last Homebrew cask install list
   slurp:
     src: /tmp/homebrew_cask_hash
@@ -38,17 +38,17 @@
     - name: Install Homebrew Casks
       homebrew_cask:
         accept_external_apps: true
-        name: "{{ homebrew_casks }}"
+        name: '{{ homebrew_casks }}'
     - name: Save hash of homebrew cask install list
       copy:
         content: "{{ ','.join(homebrew_casks) | hash('sha256') }}"
         dest: /tmp/homebrew_cask_hash
-        mode: "u=rw,g=,o="
-# - name: Install AppStore Apps
-#   mas:
-#     state: present
-#     id:
-#       - 585829637 # Todoist
+        mode: 'u=rw,g=,o='
+- name: Install AppStore Apps
+  mas:
+    state: present
+    id: '{{ app_store_apps }}'
+  when: ansible_facts.system == "Darwin"
 
 # Potentially super slow stuff
 - name: Check for last run of slow stuff
@@ -71,9 +71,11 @@
     - name: Update AppStore apps
       mas:
         upgrade_all: true
-      when: when_last_run.files | length == 0
+      when:
+        - when_last_run.files | length == 0
+        - ansible_facts.system == "Darwin"
     - name: Log run of slow stuff
       file:
         state: touch
         path: /tmp/slow_ansible_items_run
-        mode: "u=rw,g=,o="
+        mode: 'u=rw,g=,o='
