@@ -1,9 +1,9 @@
 ---
-homebrew_taps:
+workstation_homebrew_taps:
   - warrensbox/tap
   - homebrew/cask-fonts
   - oven-sh/bun
-homebrew_packages_all:
+workstation_homebrew_packages_all:
   - zsh
   - gh
   - terraform-docs
@@ -44,11 +44,11 @@ homebrew_packages_all:
   - docker
   - gum
   - mosh
-homebrew_packages_macos:
+workstation_homebrew_packages_macos:
   - defaultbrowser
   - mas
-homebrew_packages_linux: []
-homebrew_casks_all:
+workstation_homebrew_packages_linux: []
+workstation_homebrew_casks_all:
   - font-hack-nerd-font
   - visual-studio-code
   - github
@@ -58,14 +58,14 @@ homebrew_casks_all:
   - notion
   - basecamp
   - loom
-homebrew_casks_macos:
+workstation_homebrew_casks_macos:
   - iterm2
   - rectangle
   - dash
-hombrew_packages_linux: []
-app_store_apps:
+workstation_hombrew_packages_linux: []
+workstation_app_store_apps:
   - 585829637 # Todoist
-dockutil_removes:
+workstation_dockutil_removes:
   - com.apple.Terminal
   - com.apple.systempreferences
   - com.apple.AppStore
