@@ -20,15 +20,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4.1.1
       - name: Setup Python
         uses: actions/setup-python@v5.0.0
         with:
           cache: pipenv
           # Set this option if you want the action to check for the latest available version that satisfies the version spec.
           check-latest: true
-      - run: pip install pipenv
-      - uses: actions/checkout@v4.1.1
-      - run: pipenv sync --dev
+      - run: pip install pipenv && pipenv sync --dev
       - name: run-ansible-lint
         # You may pin to the exact commit or the version.
         # uses: ansible/ansible-lint@90fb69aed7be912f50e07ec0fd5ec5a02008a8fa
