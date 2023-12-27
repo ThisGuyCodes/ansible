@@ -5,10 +5,8 @@ list="$(brew list)"
 readonly list
 
 if ! grep pipenv <<<"$list"; then
-    brew install pipenv
-fi
-
-if ! grep pyenv <<<"$list"; then
+    brew install pipenv pyenv
+elif ! grep pyenv <<<"$list"; then
     brew install pyenv
 fi
 
