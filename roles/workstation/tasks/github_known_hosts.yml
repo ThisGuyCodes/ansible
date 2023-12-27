@@ -8,10 +8,11 @@
     state: directory
     mode: '0755'
 - name: Ensure known_hosts exists
-  file:
-    path: ~/.ssh/known_hosts
-    state: touch
+  copy:
+    content: ''
+    dest: ~/.ssh/known_hosts
     mode: '0600'
+    force: false
 - name: Ensure github.com known_host entries are correct
   lineinfile:
     path: ~/.ssh/known_hosts
