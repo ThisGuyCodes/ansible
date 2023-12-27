@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if ! brew list | grep pipenv; then
-    brew install pipenv
+    brew install pipenv pyenv
 fi
 
 declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
