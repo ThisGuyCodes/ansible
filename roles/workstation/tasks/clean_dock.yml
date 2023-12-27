@@ -1,6 +1,6 @@
 ---
 - name: Freeform
-  shell: '$HOME/usr/local/bin/dockutil --remove {{ item }}'
+  shell: '$HOME/usr/local/bin/dockutil $HOME/Library/Preferences/com.apple.dock.plist --remove {{ item }}'
   loop: '{{ workstation_dockutil_removes }}'
   register: dockutil_output
   changed_when: dockutil_output.rc == 0
