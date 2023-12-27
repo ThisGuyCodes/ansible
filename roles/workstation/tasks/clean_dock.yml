@@ -8,3 +8,4 @@
   ignore_errors: true
 - name: Restart the Dock
   shell: '/usr/bin/killall Dock'
+  when: dockutil_output.changed
