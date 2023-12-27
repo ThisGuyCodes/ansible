@@ -14,6 +14,9 @@
   include_tasks: github_known_hosts.yml
 - name: Setup Shell
   include_tasks: prezto.yml
+- name: Clean Dock
+  include_tasks: clean_dock.yml
+  when: ansible_facts.system == "Darwin"
 # - name: Set Chrome as the default browser
 #   script: '{{ role_path }}/files/ChromeDefault.scpt'
 #   args:
