@@ -1,0 +1,33 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+# For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
+
+name: Lint
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5.0.0
+      with:
+        cache: pipenv
+        # Set this option if you want the action to check for the latest available version that satisfies the version spec.
+        check-latest: true
+    - uses: actions/checkout@v4.1.1
+    - name: run-ansible-lint
+      # You may pin to the exact commit or the version.
+      # uses: ansible/ansible-lint@90fb69aed7be912f50e07ec0fd5ec5a02008a8fa
+      uses: ansible/ansible-lint@v6.22.1
