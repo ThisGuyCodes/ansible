@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+if ! brew list | grep pipenv; then
+    brew install pipenv
+fi
+
 declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 cd "$SCRIPT_DIR"
 

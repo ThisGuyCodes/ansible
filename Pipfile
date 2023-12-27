@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 ansible = "*"
-ansible-lint = "*"
-ansible-navigator = "*"
 
 [dev-packages]
+ansible-lint = "*"
+ansible-navigator = "*"
 
 [requires]
 python_version = "3.12"
