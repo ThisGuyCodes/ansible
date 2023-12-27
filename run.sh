@@ -4,9 +4,9 @@ set -euo pipefail
 list="$(brew list)"
 readonly list
 
-if ! grep pipenv <<<"$list"; then
+if ! grep pipenv <<<"$list" &>/dev/null; then
     brew install pipenv pyenv
-elif ! grep pyenv <<<"$list"; then
+elif ! grep pyenv <<<"$list" &>/dev/null; then
     brew install pyenv
 fi
 
