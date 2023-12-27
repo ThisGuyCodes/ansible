@@ -4,6 +4,7 @@
   loop: '{{ workstation_dockutil_removes }}'
   register: dockutil_output
   changed_when: dockutil_output.rc == 0
+  failed_when: dockutil_output.rc > 1
   ignore_errors: true
 - name: Restart the Dock
   shell: '/usr/bin/killall Dock'
