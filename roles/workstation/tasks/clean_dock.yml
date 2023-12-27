@@ -6,6 +6,7 @@
   changed_when: dockutil_output.rc == 0
   failed_when: dockutil_output.rc > 1
   ignore_errors: true
-- name: Restart the Dock
-  shell: '/usr/bin/killall Dock'
+- name: Restart the Dock # noqa: no-handler
+  command: '/usr/bin/killall Dock'
+  changed_when: true
   when: dockutil_output.changed
