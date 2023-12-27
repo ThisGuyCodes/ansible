@@ -12,3 +12,6 @@ ansible-navigator = "*"
 
 [requires]
 python_version = "3.12"
+
+[scripts]
+lint = "ansible-lint"
