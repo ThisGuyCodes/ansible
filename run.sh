@@ -1,8 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
-if ! brew list | grep pipenv; then
-    brew install pipenv pyenv
+list="$(brew list)"
+readonly list
+
+if ! grep pipenv <<<"$list"; then
+    brew install pipenv
+fi
+
+if ! grep pyenv <<<"$list"; then
+    brew install pyenv
 fi
 
 declare -r SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
