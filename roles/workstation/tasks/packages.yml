@@ -47,7 +47,7 @@
 - name: Install AppStore Apps
   mas:
     state: present
-    id: '{{ app_store_apps }}'
+    id: '{{ workstation_app_store_apps }}'
   when: ansible_facts.system == "Darwin"
 
 # Potentially super slow stuff
