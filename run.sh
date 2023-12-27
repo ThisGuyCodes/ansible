@@ -19,4 +19,4 @@ pipenv sync
 pipenv clean
 
 # exec ansible localhost -m include_role -a name=workstation "$@"
-exec pipenv run ansible-playbook ./play.yml "$@"
+exec caffeinate -i pipenv run ansible-playbook ./play.yml "$@"
