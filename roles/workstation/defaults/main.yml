@@ -54,6 +54,7 @@ workstation_homebrew_casks_all:
   - github
   - podman-desktop
   - signal
+  - flameshot
 workstation_homebrew_casks_macos:
   - iterm2
   - rectangle
